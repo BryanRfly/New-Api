@@ -22,6 +22,9 @@ router.get('/register', (req, res) => {
     res.sendFile(__path + '/views/register.html')
 })
 
+router.get('/login', (req, res) => {
+res.sendFile(__path + '/views/login.html')
+})
 
 
 module.exports = router

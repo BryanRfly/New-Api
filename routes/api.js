@@ -414,6 +414,285 @@ router.get('/canvas/xnxx', async (req, res) => {
             res.json(loghandler.error)
 })
 })
+
+// ADD FEATURE
+       router.get('/wikipedia', async(req, res, next) => {
+          query = req.query.query
+          let ptl = await pinterest(query)
+          let hss = ptl[Math.floor(Math.random() * (ptl.length))]
+          if (!query) return res.json(loghandler.notquery)
+          fetch(encodeURI(`https://abdillah-api.herokuapp.com/api/search/wikipedia?apikey=GRATISAN&q=${query}`))
+          .then(response => response.json())
+          .then(data => {
+          var result = data;
+          res.json({ 
+               status: true,
+               code: 200,
+               creator: `${creator}`,
+               image: hss,
+               quest: `${query}`,
+               answ: result.result.result
+               })
+          })
+          .catch(e => {
+          res.json(loghandler.error)
+          })
+        })
+       router.get('/infonpm', async (req, res, next) => {
+            query = req.query.query,
+            host = req.hostname
+       fetch(encodeURI(`https://registry.npmjs.org/${query}`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+             res.json({
+                 status : true,
+                 creator : `${creator}`,
+                 result,
+                 message : `Nothing`
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+})
+         
+         // Random Text
+            router.get('/randquot/katailham', async (req, res, next) => {
+            fetch(encodeURI(`https://abdillah-api.herokuapp.com/api/random/katailham?apikey=GRATISAN`))
+            .then(response => response.json())
+            .then(data => {
+            var result = data;
+            res.json({
+                status: true,
+                code: 200,
+                creator: `${creator}`,
+                katanya: result.quote
+               })
+             })
+            .catch(e => {
+         	res.json(loghandler.error)
+        })
+      })
+        router.get('/randquot/quotesdilan', async (req, res, next) => {
+            fetch(encodeURI(`https://abdillah-api.herokuapp.com/api/random/bacotandilan?apikey=GRATISAN`))
+            .then(response => response.json())
+            .then(data => {
+            var result = data;
+            res.json({
+                status: true,
+                code: 200,
+                creator: `${creator}`,
+                katanya: result.quote
+               })
+             })
+            .catch(e => {
+         	res.json(loghandler.error)
+        })
+      })    
+        router.get('/randquot/quotesanime', async (req, res, next) => {
+            fetch(encodeURI(`https://abdillah-api.herokuapp.com/api/random/quotesanime?apikey=GRATISAN`))
+            .then(response => response.json())
+            .then(data => {
+            var result = data;
+            res.json({
+                status: true,
+                code: 200,
+                creator: `${creator}`,
+                katanya: result.quote
+               })
+             })
+            .catch(e => {
+         	res.json(loghandler.error)
+        })
+      })    
+       router.get('/randquot/kata', async (req, res, next) => {
+            fetch(encodeURI(`https://abdillah-api.herokuapp.com/api/random/quotesad?apikey=GRATISAN`))
+            .then(response => response.json())
+            .then(data => {
+            var result = data;
+            res.json({
+                status: true,
+                code: 200,
+                creator: `${creator}`,
+                katanya: result.quote
+               })
+             })
+            .catch(e => {
+         	res.json(loghandler.error)
+        })
+      })   
+       router.get('/randquot/quotesislam', async (req, res, next) => {
+            fetch(encodeURI(`https://abdillah-api.herokuapp.com/api/random/quotesislami?apikey=GRATISAN`))
+            .then(response => response.json())
+            .then(data => {
+            var result = data;
+            res.json({
+                status: true,
+                code: 200,
+                creator: `${creator}`,
+                result: result.quote
+               })
+             })
+            .catch(e => {
+         	res.json(loghandler.error)
+        })
+      })   
+         
+           //PRIMBON
+              router.get('/artinama', async (req, res, next) => {
+              let query = req.query.query
+              if (!query) return res.json(loghandler.notquery)
+            fetch(encodeURI(`https://abdillah-api.herokuapp.com/api/primbon/artinama?apikey=GRATISAN&query=${query}`))
+            .then(response => response.json())
+            .then(data => {
+            var result = data;
+            res.json({
+                status: true,
+                code: 200,
+                creator: `${creator}`,
+                result:
+                 {
+                nama: query,
+                arti: result.result
+                },
+               })
+             })
+            .catch(e => {
+         	res.json(loghandler.error)
+        })
+      })    
+         router.get('/tafsirmimpi', async (req, res, next) => {
+              let query = req.query.query
+              if (!query) return res.json(loghandler.notquery)
+            fetch(encodeURI(`https://abdillah-api.herokuapp.com/api/primbon/artimimpi?apikey=GRATISAN&query=${query}`))
+            .then(response => response.json())
+            .then(data => {
+            var result = data;
+            res.json({
+                status: true,
+                code: 200,
+                creator: `${creator}`,
+                hasil:
+                 {
+                mimpi: query,
+                arti: result.result
+                },
+               })
+             })
+            .catch(e => {
+         	res.json(loghandler.error)
+        })
+      })    
+  
+         // Edukasi Feature
+          router.get('/kbbi', async(req, res, next) => {
+          query = req.query.query
+          if (!query) return res.json(loghandler.notquery)
+          fetch(encodeURI(`https://api.xteam.xyz/kbbi?kata=${query}&APIKEY=unravelB`))
+          .then(response => response.json())
+          .then(data => {
+          var result = data;
+          res.json({
+               status: true,
+               code: 200,
+               quest: result.message.word,
+               answ: result.message.list
+               })
+          })
+                   .catch(e => {
+         	res.json(loghandler.error)
+        })
+      })
+      // Searching
+       router.get('/search/wattpad', async(req, res, next) => {
+       let query = req.query.query
+       if (!query) return res.json(loghandler.notquery)
+        hxz.wattpad(query)
+        .then(res => {
+         res.json({
+         reeult
+     })
+   })
+})
+       router.get('/info/covid', async(req, res, next) => {
+       hxz.covid()
+       .then(result => {
+        res.json({
+         result
+       })
+    })
+})
+       router.get('/search/ghstalk', async(req, res, next) => {
+  let query = req.query.query
+  if (!query) return res.json(loghandler.notquery)
+  fetch(encodeURI(`https://api.github.com/users/${query}`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json({
+      status: true,
+      code: 200,
+      creator: `${creator}`,
+      result
+    })
+    .catch(e => {
+      console.log(e)
+      res.json(loghandler.error)
+    })
+  })
+})
+router.get('/search/loker', async(req, res, next) => {
+  let query = req.query.query
+  if (!query) return res.json(loghandler.notquery)
+  fetch(encodeURI(`https://abdillah-api.herokuapp.com/api/search/infoloker?apikey=GRATISAN&query=${query}`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json({
+      status: true,
+      code: 200,
+      creator: `${creator}`,
+      hasil: result.result
+    })
+    .catch(e => {
+      console.log(e)
+      res.json(loghandler.error)
+    })
+  })
+})
+      router.get('/search/playstore', async(req, res, next) => {
+  let query = req.query.query
+  if (!query) return res.json(loghandler.notquery)
+  fetch(encodeURI(`https://hardianto-chan.herokuapp.com/api/info/playstore?query=${query}&apikey=hardianto`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json({
+      status: true,
+      code: 200,
+      creator: `${creator}`,
+      hasil: result.result
+      })
+    .catch(e => {
+      console.log(e)
+      res.json(loghandler.error)
+    })
+  })
+})
+      router.get('/search/gcwa', async(req, res, next) => {
+       let query = req.query.query
+       if (!query) return res.json(loghandler.notquery)
+       hxz.linkwa(query)
+       .then(result => {
+         res.json({
+          status: true,
+          code: 200,
+          creator: `${creator}`,
+          result
+          })
+        })
+       })
      // Downloader
     router.get('/tiktok', async(req, res) => {
 	      let url = req.query.url

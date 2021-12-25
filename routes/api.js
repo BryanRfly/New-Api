@@ -16,6 +16,7 @@ let nhentai = require('nhentai-js');
 let NanaAPI = require('nana-api')
 let ch = require('canvas-hikki')
 let kc = require('knights-canvas')
+let RA = require('ra-api')
 let nana = new NanaAPI()
 let { tiktok, pinterest, mediafireDl, doujindesu, pinterestdl } = require('../lib/index')
 let options = require(__path + '/lib/options.js');
@@ -807,6 +808,11 @@ res.json({
                result 
            })
       })
+router.get('/cerpen', async(req, res) => {
+RA.RandomCerpen().then(respon => {
+     res.json(respon)
+})
+})
 router.get('/asupan', async (req, res) => {
      
        fetch(encodeURI(`https://raw.githubusercontent.com/binjaicity/warga62/master/asupan.js`))

@@ -17,6 +17,7 @@ let NanaAPI = require('nana-api')
 let ch = require('canvas-hikki')
 let kc = require('knights-canvas')
 let RA = require('ra-api')
+let brainly = require('brainly-scraper')
 let nana = new NanaAPI()
 let { tiktok, pinterest, mediafireDl, doujindesu, pinterestdl } = require('../lib/index')
 let options = require(__path + '/lib/options.js');

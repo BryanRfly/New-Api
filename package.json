@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "brainly-scraper": "^1.0.3",
     "canvas-hikki": "github:hardianto-cpu/canvas-hikki",
     "chalk": "^4.1.0",
     "cheerio": "^1.0.0-rc.10",

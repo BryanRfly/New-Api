@@ -819,7 +819,7 @@ router.get('/asupan', async (req, res) => {
           .then(async data => {
           var ty = data.split('\n')
           var ukhty  = ty[Math.floor(Math.random() * ty.length)]
-          res.send(await buffer.ukhty())
+          res.json(ukhty)
 })
 })
       router.get('/google', async (req, res, next) => {

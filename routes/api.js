@@ -815,19 +815,16 @@ RA.RandomCerpen().then(respon => {
 })
 router.get('/asupan', async (req, res) => {
      
-       fetch(encodeURI(`https://raw.githubusercontent.com/binjaicity/warga62/master/asupan.js`))
-        .then(response => response.json())
-        .then(data => {
-        var result = data;
-        var result = data[Math.floor(Math.random() * data.length)];
-             res.json({
-              status: 200,
-             	creator: creator,
-                 result
-             })
+       fetch(encodeURI('https://raw.githubusercontent.com/rapzz/asupan/master/ukhty'))
+          .then(async data => {
+          var ty = data.split('\n')
+          var ukhty  = ty[Math.floor(Math.random() * ty.length)]
+          res.json({
+                   status: true,
+                   code: 200
+                   creator: `${creator}`,
+                ukhty
          })
-         .catch(e => {
-         	res.json(loghandler.error)
 })
 })
       router.get('/google', async (req, res, next) => {

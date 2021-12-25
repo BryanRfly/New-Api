@@ -540,6 +540,26 @@ router.get('/canvas/xnxx', async (req, res) => {
          	res.json(loghandler.error)
         })
       })   
+       router.get('/edukasi/brainly', async (req, res, next) => {
+          let query = req.query.query
+          if (!query) return res.json(loghandler.notquery)
+          brainly(query).then(res => {
+          res.json({
+             status: true,
+             code: 200,
+             creator: creator,
+             result:
+               {
+               query: query,
+               res
+               },
+          })
+        })
+         .catch(e => {
+          res.json(loghandler.error)
+          res.json(e)
+     })
+})
          
            //PRIMBON
               router.get('/artinama', async (req, res, next) => {

@@ -815,11 +815,19 @@ RA.RandomCerpen().then(respon => {
 })
 router.get('/asupan', async (req, res) => {
      
-       fetch(encodeURI('https://raw.githubusercontent.com/rapzz/asupan/master/ukhty'))
-          .then(async data => {
-          var ty = data.split('\n')
-          var ukhty  = ty[Math.floor(Math.random() * ty.length)]
-          res.json(ukhty)
+       fetch(encodeURI(`https://raw.githubusercontent.com/BryanRfly/Random/main/P.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             res.json({
+              status: 200,
+             	creator: creator,
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
 })
 })
       router.get('/google', async (req, res, next) => {

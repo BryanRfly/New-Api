@@ -44,7 +44,7 @@ loghandler = {
     error: {
         status: 404,
         creator: `${creator}`,
-        message: 'An internal error occurred. Please report via WhatsApp wa.me/62895619083555'
+        message: 'An internal error occurred. Please report via WhatsApp wa.me/6287724880504'
     }
 }
 router.get('/canvas/welcome', async (req, res) => {
@@ -543,16 +543,13 @@ router.get('/canvas/xnxx', async (req, res) => {
        router.get('/edukasi/brainly', async (req, res, next) => {
           let query = req.query.query
           if (!query) return res.json(loghandler.notquery)
-          brainly(query).then(res => {
+          brainly(query)
+          .then(res => {
           res.json({
              status: true,
              code: 200,
              creator: creator,
-             result:
-               {
-               query: query,
-               res
-               },
+             res
           })
         })
          .catch(e => {

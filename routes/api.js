@@ -17,6 +17,7 @@ let NanaAPI = require('nana-api')
 let ch = require('canvas-hikki')
 let kc = require('knights-canvas')
 let RA = require('ra-api')
+let lk = require('lk-api')
 let brainly = require('brainly-scraper')
 let nana = new NanaAPI()
 let { tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok } = require('../lib/index')
@@ -49,9 +50,9 @@ loghandler = {
 }
 
 router.get('/asupantt', async (req, res, next) => {
-          let query = req.query.query
-          if (!query) return res.json(loghandler.notquery)
-          asupantiktok(query)
+          let username = req.query.username
+          if (!username) return res.json('Message: Input Parameter Username\nCr: Bryanrfly')
+          asupantiktok(username)
           .then(result => {
           res.json(result)
        })
@@ -111,13 +112,13 @@ router.get('/search/jsholat', async (req, res, next) => {
       creator: `${creator}`,
       result: 
       {
-       isya: result.isha,
-       subuh: result.subuh,
-       terbit: result.sunrise,
-       dzuhur: result.dzuhur,
-       ashar: result.ashar,
-       terbenam: result.sunset,
-       maghrib: result.maghrib,
+       isya: result.result.isha,
+       subuh: result.result.subuh,
+       terbit: result.result.sunrise,
+       dzuhur: result.result.dzuhur,
+       ashar: result.result.ashar,
+       terbenam: result.result.sunset,
+       maghrib: result.result.maghrib,
       }
     })
   })

@@ -19,7 +19,7 @@ let kc = require('knights-canvas')
 let RA = require('ra-api')
 let brainly = require('brainly-scraper')
 let nana = new NanaAPI()
-let { tiktok, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok } = require('../lib/index')
+let { tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok } = require('../lib/index')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
 let { getBuffer, fetchJson } = require(__path + '/lib/fetcher.js');
@@ -48,6 +48,20 @@ loghandler = {
     }
 }
 
+router.get('/pray/surah', async (req, tes, next) => {
+           let query = req.query.query
+           if (!query) return res.json(loghandler.notquery)
+           surah(query)
+           .then(result => {
+            res.json({
+            status: true,
+            creator: creator,
+            result
+          })
+        })
+        .catch(e => {
+        res.json(loghandler.error)
+})
 router.get('/asupantt', async (req, res, next) => {
           let query = req.query.query
           if (!query) return res.json(loghandler.notquery)

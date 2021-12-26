@@ -53,11 +53,7 @@ router.get('/pray/surah', async (req, tes, next) => {
            if (!query) return res.json(loghandler.notquery)
            surah(query)
            .then(result => {
-            res.json({
-            status: true,
-            creator: creator,
-            result
-          })
+            res.json(result)
         })
         .catch(e => {
         res.json(loghandler.error)

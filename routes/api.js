@@ -61,9 +61,9 @@ router.get('/asupantt', async (req, res, next) => {
  })
  
  router.get('/pray/surah', async (req, res, next) => {
-   let query = req.query.query 
-   if (!query) return res.json(loghandler.notquery)
-   surah(query)
+   let nomor = req.query.nomor
+   if (!nomor) return res.json(loghandler.notquery)
+   surah(nomor)
    .then(result => {
      res.json(result)
    })

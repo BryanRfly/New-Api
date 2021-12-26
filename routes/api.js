@@ -73,8 +73,8 @@ router.get('/search/joox', async (req, res, next) => {
       creator: `${creator}`,
       result: 
       {
-        judul: result.result.judul,
-        album: result.result.album,
+        judul: result.result.album,
+        album: result.result.judul,
         publik: result.result.dipublukasikan,
        thumbnail: result.result.thumb,
        link_audio: result.result.mp3

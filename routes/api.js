@@ -48,16 +48,6 @@ loghandler = {
     }
 }
 
-router.get('/pray/surah', async (req, tes, next) => {
-           let query = req.query.query
-           if (!query) return res.json(loghandler.notquery)
-           surah(query)
-           .then(result => {
-            res.json(result)
-        })
-        .catch(e => {
-        res.json(loghandler.error)
-})
 router.get('/asupantt', async (req, res, next) => {
           let query = req.query.query
           if (!query) return res.json(loghandler.notquery)
@@ -68,6 +58,18 @@ router.get('/asupantt', async (req, res, next) => {
          .catch(e => {
           res.json(loghandler.error)
       })
+ })
+ 
+ router.get('/pray/surah', async (req, res, next) => {
+   let query = req.query.query 
+   if (!query) return res.json(loghandler.notquery)
+   surah(query)
+   .then(result => {
+     res.json(result)
+   })
+   .catch(e => {
+     res.json(loghandler.error)
+   })
  })
 router.get('/canvas/welcome', async (req, res) => {
             pp = req.query.pp,

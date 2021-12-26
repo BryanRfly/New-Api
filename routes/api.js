@@ -19,7 +19,7 @@ let kc = require('knights-canvas')
 let RA = require('ra-api')
 let brainly = require('brainly-scraper')
 let nana = new NanaAPI()
-let { tiktok, pinterest, mediafireDl, doujindesu, pinterestdl } = require('../lib/index')
+let { tiktok, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok } = require('../lib/index')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
 let { getBuffer, fetchJson } = require(__path + '/lib/fetcher.js');
@@ -47,6 +47,15 @@ loghandler = {
         message: 'An internal error occurred. Please report via WhatsApp wa.me/6287724880504'
     }
 }
+
+router.get('/asupantt', async (req, res, next) => {
+          let query = req.query.query
+          if (!query) return res.json(loghandler.notquery)
+          asupantiktok(query)
+          .then(res => {
+          res.json(res)
+       })
+ })
 router.get('/canvas/welcome', async (req, res) => {
             pp = req.query.pp,
             nama = req.query.nama,

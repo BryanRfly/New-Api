@@ -97,6 +97,81 @@ router.get('/search/joox', async (req, res, next) => {
      res.json(loghandler.error)
    })
  })
+
+router.get('/search/jsholat', async (req, res, next) => {
+  let daerah = req.query.daerah
+  if (!daerah) return res.json('Input Parameter Daerah!')
+  fetch(encodeURI(`https://vinz12.herokuapp.com/api/jadwalshalat?q=${daerah}`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json({ 
+      status: true,
+      code: 200,
+      creator: `${creator}`,
+      result: 
+      {
+       isya: result.isha,
+       subuh: result.subuh,
+       terbit: result.sunrise,
+       dzuhur: result.dzuhur,
+       ashar: result.ashar,
+       terbenam: result.sunset,
+       maghrib: result.maghrib,
+      }
+    })
+  })
+  .catch(e => {
+    res.json('Sorry Error')
+  })
+})
+
+router.get('/anime/nekonime', async (req, res, next) => {
+  fetch(encodeURI('https://vinz12.herokuapp.com/api/nekonime'))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json({
+      creator:`${creator}`,
+      image_url: result
+    })
+  })
+  .catch(e => {
+    res.json(loghandler.error)
+  })
+})
+
+router.get('/anime/randaime', async (req, res, next) => {
+  fetch(encodeURI('https://vinz12.herokuapp.com/api/randonanime'))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json({
+      creator:`${creator}`,
+      image_url: result
+    })
+  })
+  .catch(e => {
+    res.json(loghandler.error)
+  })
+})
+
+router.get('/anime/randhentai', async (req, res, next) => {
+  fetch(encodeURI('https://vinz12.herokuapp.com/api/hentai'))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json({
+      creator:`${creator}`,
+      image_url: result
+    })
+  })
+  .catch(e => {
+    res.json(loghandler.error)
+  })
+})
+
+
 router.get('/canvas/welcome', async (req, res) => {
             pp = req.query.pp,
             nama = req.query.nama,

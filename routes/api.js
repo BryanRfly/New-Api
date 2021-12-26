@@ -52,9 +52,12 @@ router.get('/asupantt', async (req, res, next) => {
           let query = req.query.query
           if (!query) return res.json(loghandler.notquery)
           asupantiktok(query)
-          .then(res => {
-          res.json(res)
+          .then(result => {
+          res.json(result)
        })
+         .catch(e => {
+          res.json(loghandler.error)
+      })
  })
 router.get('/canvas/welcome', async (req, res) => {
             pp = req.query.pp,

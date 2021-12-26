@@ -57,7 +57,7 @@ loghandler = {
 
 router.get('/search/igstalk', async (req, res, next) => {
         let username = req.query.username
-        if (!query) return res.json(loghandler.notusername)
+        if (!username) return res.json(loghandler.notusername)
         lk.IgStalk(username)
          .then(result => {
           res.json(result)

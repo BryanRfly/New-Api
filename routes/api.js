@@ -62,7 +62,7 @@ router.get('/search/igstalk', async (req, res, next) => {
          .then(result => {
           res.json(result)
      })
-)}
+})
 router.get('/asupantt', async (req, res, next) => {
           let username = req.query.username
           if (!username) return res.json('Message: Input Parameter Username\nCr: Bryanrfly')

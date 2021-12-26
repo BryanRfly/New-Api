@@ -60,6 +60,32 @@ router.get('/asupantt', async (req, res, next) => {
       })
  })
  
+router.get('/search/joox', async (req, res, next) => {
+  let query = req.query.query
+  if (!query) return res.json(loghandler.error)
+  fetch(encodeURI(`https://vinz12.herokuapp.com/api/joox?q=${query}`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json({
+      status: true,
+      code: 200,
+      creator: `${creator}`,
+      result: 
+      {
+        judul: result.result.judul,
+        album: result.result.album,
+        publik: result.result.dipublukasikan,
+       thumbnail: result.result.thumb,
+       link_audio: result.result.mp3
+      }
+    })
+  })
+  .catch(e => {
+    res.json(loghandler.error)
+  })
+})
+
  router.get('/pray/surah', async (req, res, next) => {
    let nomor = req.query.nomor
    if (!nomor) return res.json(loghandler.notquery)

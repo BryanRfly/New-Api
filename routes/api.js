@@ -42,6 +42,12 @@ loghandler = {
         code: 406,
         message: 'Masukkan query'
     },
+    notusername: {
+        status: false,
+        creator: `${creator}`,
+        code: 406,
+        message: 'Masukkan query'
+    },
     error: {
         status: 404,
         creator: `${creator}`,
@@ -49,6 +55,14 @@ loghandler = {
     }
 }
 
+router.get('/search/igstalk', async (req, res, next) => {
+        let username = req.query.username
+        if (!query) return res.json(loghandler.notusername)
+        lk.IgStalk(username)
+         .then(result => {
+          res.json(result)
+     })
+)}
 router.get('/asupantt', async (req, res, next) => {
           let username = req.query.username
           if (!username) return res.json('Message: Input Parameter Username\nCr: Bryanrfly')

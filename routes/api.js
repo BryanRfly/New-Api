@@ -20,7 +20,7 @@ let RA = require('ra-api')
 let lk = require('lk-api')
 let brainly = require('brainly-scraper')
 let nana = new NanaAPI()
-let { asahotak, family100, tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok } = require('../lib/index')
+let { asahotak, family100, tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok, xnxxsearch} = require('../lib/index')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
 let { getBuffer, fetchJson } = require(__path + '/lib/fetcher.js');
@@ -55,6 +55,14 @@ loghandler = {
     }
 }
 
+router.get('/search/xnxxsearch', async (req, res, next) => {
+            let query = req.query.query
+            if (!query) return res.json(loghandler.notquery)
+            xnxxsearch(query)
+            .then(result => {
+             res.json(result)
+        })
+ })
 router.get('/game/asahotak', async (req, res, next) => {
           asahotak()
           .then(result => {

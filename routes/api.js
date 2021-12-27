@@ -61,6 +61,12 @@ router.get('/game/asahotak', async (req, res, next) => {
            res.json(result)
           })
       })
+router.get('/game/family100', async (req, res, next) => {
+          family100()
+          .then(result => {
+           res.json(result)
+          })
+      })
 router.get('/search/igstalk', async (req, res, next) => {
         let username = req.query.username
         if (!username) return res.json(loghandler.notusername)

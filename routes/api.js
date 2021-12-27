@@ -20,7 +20,7 @@ let RA = require('ra-api')
 let lk = require('lk-api')
 let brainly = require('brainly-scraper')
 let nana = new NanaAPI()
-let { tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok } = require('../lib/index')
+let { asahotak, family100, tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok } = require('../lib/index')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
 let { getBuffer, fetchJson } = require(__path + '/lib/fetcher.js');
@@ -34,19 +34,19 @@ loghandler = {
         status: false,
         creator: `${creator}`,
         code: 406,
-        message: 'Masukan URL'
+        message: 'Masukan Parameter URL'
     },
     notquery: {
         status: false,
         creator: `${creator}`,
         code: 406,
-        message: 'Masukkan query'
+        message: 'Masukkan Parameter query'
     },
     notusername: {
         status: false,
         creator: `${creator}`,
         code: 406,
-        message: 'Masukkan query'
+        message: 'Masukkan Parameter Username'
     },
     error: {
         status: 404,
@@ -55,6 +55,12 @@ loghandler = {
     }
 }
 
+router.get('/game/asahotak', async (req, res, next) => {
+          asahotak()
+          .then(result => {
+           res.json(result)
+          })
+      })
 router.get('/search/igstalk', async (req, res, next) => {
         let username = req.query.username
         if (!username) return res.json(loghandler.notusername)

@@ -17,7 +17,6 @@ let NanaAPI = require('nana-api')
 let ch = require('canvas-hikki')
 let kc = require('knights-canvas')
 let RA = require('ra-api')
-let lk = require('lk-api')
 let brainly = require('brainly-scraper')
 let nana = new NanaAPI()
 let { asahotak, family100, tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok, xnxxsearch} = require('../lib/index')
@@ -75,14 +74,7 @@ router.get('/game/family100', async (req, res, next) => {
            res.json(result)
           })
       })
-router.get('/search/igstalk', async (req, res, next) => {
-        let username = req.query.username
-        if (!username) return res.json(loghandler.notusername)
-        lk.IgStalk(username)
-         .then(result => {
-          res.json(result)
-     })
-})
+
 router.get('/asupantt', async (req, res, next) => {
           let username = req.query.username
           if (!username) return res.json('Message: Input Parameter Username\nCr: Bryanrfly')

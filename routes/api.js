@@ -35,7 +35,7 @@ let { pShadow,
   pCoffeCup,
   pLoveText,
   pButterfly
-} = require('../scraper/photooxy')
+} = require('../lib/scraper/photooxy')
 
 async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

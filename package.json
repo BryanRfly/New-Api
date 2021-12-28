@@ -33,7 +33,6 @@
     "form-data": "^4.0.0",
     "fs": "0.0.1-security",
     "knights-canvas": "github:hardiantojek93/knights-canvas",
-    "lk-api": "^1.6.3",
     "moment": "^2.29.1",
     "mongodb": "^3.6.3",
     "monk": "^7.3.3",

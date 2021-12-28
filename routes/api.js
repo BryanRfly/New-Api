@@ -19,7 +19,7 @@ let kc = require('knights-canvas')
 let RA = require('ra-api')
 let brainly = require('brainly-scraper')
 let nana = new NanaAPI()
-let { asahotak, family100, tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok, xnxxsearch} = require('../lib/index')
+let { asahotak, family100, tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok, xnxxsearch, xnxxdl } = require('../lib/index')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
 let { getBuffer, fetchJson } = require(__path + '/lib/fetcher.js');
@@ -58,6 +58,14 @@ router.get('/search/xnxxsearch', async (req, res, next) => {
             let query = req.query.query
             if (!query) return res.json(loghandler.notquery)
             xnxxsearch(query)
+            .then(result => {
+             res.json(result)
+        })
+ })
+router.get('/download/xnxxdl', async (req, res, next) => {
+            let url = req.query.url
+            if (!url) return res.json(loghandler.noturl)
+            xnxxdl(url)
             .then(result => {
              res.json(result)
         })

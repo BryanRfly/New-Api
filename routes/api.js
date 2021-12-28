@@ -19,10 +19,23 @@ let kc = require('knights-canvas')
 let RA = require('ra-api')
 let brainly = require('brainly-scraper')
 let nana = new NanaAPI()
-let { asahotak, family100, tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok, xnxxsearch, xnxxdl, Shopee} = require('../lib/index')
+let { asahotak, family100, tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok, xnxxsearch, xnxxdl, Shopee, sfilesearch, playstore} = require('../lib/index')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
 let { getBuffer, fetchJson } = require(__path + '/lib/fetcher.js');
+let { pShadow,
+  pRomantic,
+  pSmoke,
+  pBurnPapper,
+  pNaruto,
+  pLoveMsg,
+  pMsgGrass,
+  pGlitch,
+  pDoubleHeart,
+  pCoffeCup,
+  pLoveText,
+  pButterfly
+} = require('../scraper/photooxy')
 
 async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -53,6 +66,33 @@ loghandler = {
         message: 'An internal error occurred. Please report via WhatsApp wa.me/6287724880504'
     }
 }
+
+router.get('/search/sfilesearch', async (req, tes, next) => {
+           let query = req.query.query
+           if (!query) return res.json(loghandler.notquery)
+           sfilesearch(query)
+           .then(result => {
+           res.json(result)
+        })
+})
+
+router.get('/search/pstore', async (req, tes, next) => {
+           let query = req.query.query
+           if (!query) return res.json(loghandler.notquery)
+           playstore(query)
+           .then(result => {
+           res.json(result)
+        })
+})
+
+router.get('/photooxy/glitch', async (req, tes, next) => {
+           let text = req.query.text
+           if (!text) throw 'Input Text!'
+           pGlitch(text)
+           .then(result => {
+           res.json(result)
+        })
+})
 
 router.get('/search/shopee', async (req, res, next) => {
            let query = req.query.query

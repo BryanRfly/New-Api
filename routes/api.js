@@ -85,10 +85,10 @@ router.get('/search/pstore', async (req, tes, next) => {
         })
 })
 
-router.get('/photooxy/glitch', async (req, tes, next) => {
-           let text = req.query.text
-           if (!text) throw 'Input Text!'
-           pGlitch(text)
+router.get('/photooxy/pLoveMsg', async (req, tes, next) => {
+           let text1 = req.query.text1
+           if (!text1) return res.json('Input Text!')
+           pLoveMsg(text1)
            .then(result => {
            res.json(result)
         })

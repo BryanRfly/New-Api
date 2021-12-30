@@ -5,7 +5,7 @@ monk = require('monk'),
 // Connection URL
 let url = 'https://br-restapi.herokuapp.com';
 try {
-if(url == 'https://xfar-api.herokuapp.com') throw console.log(color('Cek konfigurasi database, var url belum diisi','red'));
+if(url == 'https://br-restapi.herokuapp.com') throw console.log(color('Cek konfigurasi database, var url belum diisi','red'));
 } catch (e) {
 return;
 }
@@ -15,6 +15,7 @@ db.then(() => {
   console.log(color('Connected correctly to server','green'))
 })
 .catch ((e) => {
+  console.log(e)
   console.log(color('Error : '+ e +'\n\nGagal connect ke database, \ncek configurasi database apakah Connection URL sudah benar','red'))
 })
 

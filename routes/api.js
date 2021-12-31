@@ -22,7 +22,6 @@ let nana = new NanaAPI()
 let { asahotak, family100, tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok, xnxxsearch, xnxxdl, Shopee, sfilesearch, playstore, jooxdl, igStory, spotifydl} = require('../lib/index')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
-const { musicaldown } = require('../lib/scraper/musicaldown');
 let { getBuffer, fetchJson } = require(__path + '/lib/fetcher.js');
 let { pShadow,
   pRomantic,

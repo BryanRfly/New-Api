@@ -22,6 +22,7 @@ let nana = new NanaAPI()
 let { asahotak, family100, tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok, xnxxsearch, xnxxdl, Shopee, sfilesearch, playstore} = require('../lib/index')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
+const { musicaldown } = require('../lib/scraper/musicaldown');
 let { getBuffer, fetchJson } = require(__path + '/lib/fetcher.js');
 let { pShadow,
   pRomantic,
@@ -67,25 +68,10 @@ loghandler = {
     }
 }
 
-router.get('/ttp', async(req, res) => {
-  var text = req.query.text
-  if (!text) return res.json('Input Parameter Text!')
-    const data = await getBuffer(`https://rya-kun.herokuapp.com/api/ttp?text=${text}`)
-    await fs.writeFileSync(__path +'/tmp/ttp.png', data)
-    await res.sendFile(__path +'/tmp/ttp.png')
-})
-
-router.get('/attp', async(req, res) => {
-  var text = req.query.text
-  if (!text) return res.json('Input Parameter Text')
-   const data = await getBuffer(`https://rya-kun.herokuapp.com/api/attp?text=${text}`)
-    await fs.writeFileSync(__path +'/tmp/attp.png', data)
-    await res.sendFile(__path +'/tmp/attp.png')
-})
 
 router.get('/skrinsotweb', async(req, res) => {
-  var link = req.query.link
-  if (!link) return res.json(loghandler.notquery)
+  var url = req.query.url
+  if (!url) return res.json(loghandler.notquery)
     const data = await getBuffer(`https://rya-kun.herokuapp.com/api/ssweb?link=${link}`)
     await fs.writeFileSync(__path +'/tmp/ssweb.png', data)
     await res.sendFile(__path +'/tmp/ssweb.png')

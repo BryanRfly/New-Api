@@ -67,32 +67,14 @@ loghandler = {
     }
 }
 
-router.get('/search/sfilesearch', async (req, tes, next) => {
-           let query = req.query.query
-           if (!query) return res.json(loghandler.notquery)
-           sfilesearch(query)
-           .then(result => {
-           res.json(result)
-        })
+router.get('/skrinsotweb', async(req, res) => {
+  var link = req.query.link
+  if (!link) return res.json(loghandler.notquery)
+    const data = await getBuffer(`https://rya-kun.herokuapp.com/api/ssweb?link=${link}`)
+    await fs.writeFileSync(__path +'/tmp/ssweb.png', data)
+    await res.sendFile(__path +'/tmp/ssweb.png')
 })
 
-router.get('/search/pstore', async (req, tes, next) => {
-           let query = req.query.query
-           if (!query) return res.json(loghandler.notquery)
-           playstore(query)
-           .then(result => {
-           res.json(result)
-        })
-})
-
-router.get('/photooxy/pLoveMsg', async (req, tes, next) => {
-           let text1 = req.query.text1
-           if (!text1) return res.json('Input Text!')
-           pLoveMsg(text1)
-           .then(result => {
-           res.json(result)
-        })
-})
 
 router.get('/search/shopee', async (req, res, next) => {
            let query = req.query.query

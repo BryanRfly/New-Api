@@ -19,7 +19,7 @@ let kc = require('knights-canvas')
 let RA = require('ra-api')
 let brainly = require('brainly-scraper')
 let nana = new NanaAPI()
-let { asahotak, family100, tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok, xnxxsearch, xnxxdl, Shopee, sfilesearch, playstore} = require('../lib/index')
+let { asahotak, family100, tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok, xnxxsearch, xnxxdl, Shopee, sfilesearch, playstore, jooxdl, igStory, spotifydl} = require('../lib/index')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
 const { musicaldown } = require('../lib/scraper/musicaldown');
@@ -68,7 +68,36 @@ loghandler = {
     }
 }
 
+router.get('/downloader/spotifydl', async(req, res) => {
+	var url = req.query.url
+	if (!link) return res.json({ message: 'masukan parameter Link' })
+	var hasil = await spotifydl.downloadTrack(url)
+	try {
+		await fs.writeFileSync(__path +'/tmp/audio.mp3', hasil)
+   		await res.sendFile(__path +'/tmp/audio.mp3')
+	} catch(err) {
+		console.log(err)
+		res.json({ message: 'Ups, error' })
+	}
+})
 
+router.get('/search/igStory', async (req, res, next) => {
+         let username = req.query.username
+         if (!username) return res.json(loghandler.notusername)
+         igStory(username)
+         .then(result => {
+          res.json(result)
+        })
+   })
+
+router.get('/downloader/jooxdl', async(req, res, next) => {
+         let url = req.query.url
+         if (!url) return res.json(loghandler.noturl)
+         jooxdl(url)
+         .then(result => {
+          res.json(result)
+         })
+    })
 router.get('/skrinsotweb', async(req, res) => {
   var url = req.query.url
   if (!url) return res.json(loghandler.notquery)

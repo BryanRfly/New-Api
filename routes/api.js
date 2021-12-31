@@ -19,7 +19,7 @@ let kc = require('knights-canvas')
 let RA = require('ra-api')
 let brainly = require('brainly-scraper')
 let nana = new NanaAPI()
-let { asahotak, family100, tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok, xnxxsearch, xnxxdl, Shopee, sfilesearch, playstore, jooxdl, igStory, spotifydl} = require('../lib/index')
+let { asahotak, family100, tiktok, surah, pinterest, mediafireDl, doujindesu, pinterestdl, asupantiktok, xnxxsearch, xnxxdl, Shopee, sfilesearch, playstore, jooxdl, igStory} = require('../lib/index')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
 let { getBuffer, fetchJson } = require(__path + '/lib/fetcher.js');
@@ -66,19 +66,6 @@ loghandler = {
         message: 'An internal error occurred. Please report via WhatsApp wa.me/6287724880504'
     }
 }
-
-router.get('/downloader/spotifydl', async(req, res) => {
-	var url = req.query.url
-	if (!link) return res.json({ message: 'masukan parameter Link' })
-	var hasil = await spotifydl.downloadTrack(url)
-	try {
-		await fs.writeFileSync(__path +'/tmp/audio.mp3', hasil)
-   		await res.sendFile(__path +'/tmp/audio.mp3')
-	} catch(err) {
-		console.log(err)
-		res.json({ message: 'Ups, error' })
-	}
-})
 
 router.get('/search/igStory', async (req, res, next) => {
          let username = req.query.username

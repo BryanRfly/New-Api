@@ -67,6 +67,22 @@ loghandler = {
     }
 }
 
+router.get('/ttp', async(req, res) => {
+  var text = req.query.text
+  if (!text) return res.json('Input Parameter Text!')
+    const data = await getBuffer(`https://rya-kun.herokuapp.com/api/ttp?text=${text}`)
+    await fs.writeFileSync(__path +'/tmp/ttp.png', data)
+    await res.sendFile(__path +'/tmp/ttp.png')
+})
+
+router.get('/attp', async(req, res) => {
+  var text = req.query.text
+  if (!text) return res.json('Input Parameter Text')
+   const data = await getBuffer(`https://rya-kun.herokuapp.com/api/attp?text=${text}`)
+    await fs.writeFileSync(__path +'/tmp/attp.png', data)
+    await res.sendFile(__path +'/tmp/attp.png')
+})
+
 router.get('/skrinsotweb', async(req, res) => {
   var link = req.query.link
   if (!link) return res.json(loghandler.notquery)

@@ -67,6 +67,35 @@ loghandler = {
     }
 }
 
+router.get('/search/stickersearch', async (req, res, next) => {
+          let query = req.query.query
+          if(!query) return res.json(loghandler.notquery)
+          stickerSearch(query)
+          .then(result => {
+           res.json(result)
+        })
+ })
+     
+router.get('/primbon/ramalJodoh', async (req, res, next) => {
+         let nama = req.query.nama
+         let pasangan = req.query.pasangan
+         if (!nama) return res.json('Input Parameter Nama!')
+         If (!pasangan) return res.json('Input Parameter Nama Pasangan!')
+         ramalJodoh(nama, pasangan)
+         .then(result => {
+          res.json(result)
+       })
+})
+
+router.get('/search/trendtwit', async (req, res, next) => {
+          let daerah = req.query.daerah
+          if (!daerah) return res.json('Input Parameter Daerah!')
+          trendtwit(daerah)
+          .then(result => {
+          res.json(result)
+       })
+})
+
 router.get('/search/igStory', async (req, res, next) => {
          let username = req.query.username
          if (!username) return res.json(loghandler.notusername)

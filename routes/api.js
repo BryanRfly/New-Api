@@ -80,7 +80,7 @@ router.get('/primbon/ramalJodoh', async (req, res, next) => {
          let nama = req.query.nama
          let pasangan = req.query.pasangan
          if (!nama) return res.json('Input Parameter Nama!')
-         If (!pasangan) return res.json('Input Parameter Nama Pasangan!')
+         if (!pasangan) return res.json('Input Parameter Nama Pasangan!')
          ramalJodoh(nama, pasangan)
          .then(result => {
           res.json(result)

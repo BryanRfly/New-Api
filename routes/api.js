@@ -67,6 +67,15 @@ loghandler = {
     }
 }
 
+router.get('/downloader/stickpackdl', async (req, res, next) => {
+          let url = req.query.url
+          if (!url) return res.json('Input Parameter Url!')
+          fetch(encodeURI(`https://tyz-api.herokuapp.com/downloader/stickerpack?link=${url}`))
+          .then(data => {
+          var result = data;
+          res.json(result)
+     })
+})
 router.get('/search/stickersearch', async (req, res, next) => {
           let query = req.query.query
           if(!query) return res.json(loghandler.notquery)

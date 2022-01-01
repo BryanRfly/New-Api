@@ -125,7 +125,7 @@ router.get('/downloader/jooxdl', async(req, res, next) => {
 router.get('/skrinsotweb', async(req, res) => {
   var url = req.query.url
   if (!url) return res.json(loghandler.notquery)
-    const data = await getBuffer(`https://rya-kun.herokuapp.com/api/ssweb?link=${link}`)
+    const data = await getBuffer(`https://rya-kun.herokuapp.com/api/ssweb?link=${url}`)
     await fs.writeFileSync(__path +'/tmp/ssweb.png', data)
     await res.sendFile(__path +'/tmp/ssweb.png')
 })

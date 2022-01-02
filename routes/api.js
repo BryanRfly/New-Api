@@ -72,22 +72,21 @@ router.get('/tools/html-scraper', async (req, res, next) => {
   if (!url) return res.json(loghandler.noturl)
   axios.get(`${url}`)
   .then(result => {
-    res.json(result)
+    res.json(result.data)
   })
   .catch(e => {
     res.json('Internal Server Error!')
+    console.log(e)
   })
 })
 
 
-router.get('/serch/handphone', async (req, res, next) => {
+router.get('/search/handphone', async (req, res, next) => {
   let query = req.query.query
   if (!query) return res.json(loghandler.notquery)
-  fetch(encodeURI(`https://api-mobilespecs.azharimm.site/v2/search?query=${query}`))
-  .then(response => response.json())
-  .then(data => {
-    var result = data;
-    for (let i of result.data.data) {
+  axios.get(`https://api-mobilespecs.azharimm.site/v2/search?query=${query}`)
+  .then(result => {
+    for (let i of result.data.data.phones) {
       teks += `Title: Hasil Pencarian Dari Hp ${query}\n`
       teks += `brand: ${i.brand}\n`
       teks += `phone_type: ${i.phone_name}\n`

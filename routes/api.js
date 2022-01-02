@@ -71,33 +71,31 @@ router.get('/tools/html-scraper', async (req, res, next) => {
   let url = req.query.url
   if (!url) return res.json(loghandler.noturl)
   axios.get(`${url}`)
-  .then(data => {
-    var result = data;
+  .then(result => {
     res.json(result)
   })
   .catch(e => {
-    console.log(e)
     res.json('Internal Server Error!')
   })
 })
 
-router.get('/search/handphone', async (req, res, next) => {
+
+router.get('/serch/handphone', async (req, res, next) => {
   let query = req.query.query
-  if (!query) return res.json('Input Parameter Query!')
-  fetch(encodeURI(`https://pecundang.herokuapp.com/api/gsmarena?query=${query}`))
+  if (!query) return res.json(loghandler.notquery)
+  fetch(encodeURI(`https://api-mobilespecs.azharimm.site/v2/search?query=${query}`))
   .then(response => response.json())
   .then(data => {
-    var hasil = data;
-    for (let i of hasil.result) {
-      teks += `Judul; ${i.judul}\n`
-      teks += `pict_img: ${i.thumb}\n`
-      teks += `link: ${i.link}`
+    var result = data;
+    for (let i of result.data.data) {
+      teks += `Title: Hasil Pencarian Dari Hp ${query}\n`
+      teks += `brand: ${i.brand}\n`
+      teks += `phone_type: ${i.phone_name}\n`
+      teks += `slug: ${i.slug}\n`
+      teks += `image: ${i.image}\n`
+      teks += `detail: https://br-restapi.herokuapp.com/info/detailhp?slug=${i.slug}`
     }
-    res.json(teks)
-  })
-  .catch(e => {
-    console.log(e)
-    res.json('Internal Server Error!')
+    res.json(teks.trim())
   })
 })
 

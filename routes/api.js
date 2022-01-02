@@ -4,7 +4,7 @@ let db = require(__path + '/database/db');
 try {
 let zahirr = db.get("zahirr");
 } catch (e) {
-	console.log('')  
+	console.log(e)  
 }
 let creator = "BryanRfly"
 let axios = require('axios')
@@ -66,6 +66,37 @@ loghandler = {
         message: 'An internal error occurred. Please report via WhatsApp wa.me/6287724880504'
     }
 }
+
+router.get('/info/cuaca', async (req, res, next) => {
+  let provinsi = req.query.provinsi
+  let kabupaten = req.query.kabupaten
+  if (!provinsi) return res.json('Please Input Parameter Provinsi!')
+  if (!kabupaten) return res.json('Please Input Parameter Kabupaten!')
+  fetch(encodeURI(`https://cuaca-gempa-rest-api.vercel.app/weather/${provinsi}/${kabupaten}`))
+  
+   .then(response => response.json())
+   .then(data => {
+     var result = data;
+     res.json(JSON.stringify(result, null, 2))
+   })
+   .catch(e => {
+     res.json(loghandler.error)
+   })
+})
+
+router.get('/search/phone', async (req, res, next) => {
+  let handphone = req.query.handphone
+  if (!handphone) return res.json('Input Parameter Handphone!')
+  fetch(encodeURI(`https://api-mobilespecs.azharimm.site/v2/search?query=${handphone}`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json(JSON.stringify(result, null, 2))
+  })
+  .catch(e => {
+    res.json(loghandler.error)
+  })
+})
 
 router.get('/downloader/stickpackdl', async (req, res, next) => {
           let url = req.query.url

@@ -76,6 +76,7 @@ router.get('/tools/html-scraper', async (req, res, next) => {
     res.json(result)
   })
   .catch(e => {
+    console.log(e)
     res.json('Internal Server Error!')
   })
 })
@@ -95,6 +96,7 @@ router.get('/search/handphone', async (req, res, next) => {
     res.json(teks)
   })
   .catch(e => {
+    console.log(e)
     res.json('Internal Server Error!')
   })
 })

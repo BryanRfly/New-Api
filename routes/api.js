@@ -84,7 +84,7 @@ router.get('/search/sekolah', async (req, res, next) => {
   let page = req.query.page
   if (!jsekolah) return res.json('Input Parameter Jenjang Sekolah! Contoh: SD/SMP/SMA/SMK')
   if (!page) return res.json('Input Parameter Page From 1 - 10')
-  fetch(encodeURI(`https://api-sekolah-indonesia.herokuapp.com/sekolah/${jsekolah}?page=${page}&perPage=20`))
+  fetch(encodeURI(`https://api-sekolah-indonesia.herokuapp.com/sekolah/${jsekolah}?page=${page}&perPage=30`))
   .then(response => response.json())
   .then(data => {
     var result = data;
@@ -97,7 +97,7 @@ router.get('/search/sekolah', async (req, res, next) => {
 
 router.get('/search/sekolah-byname', async (req, res, next) => {
   let namasekolah = req.query.namasekolah
-  if (!namasekolah) return res.json('Input Parameter Query')
+  if (!namasekolah) return res.json('Input Parameter Nama sekolah')
   fetch(encodeURI(`https://api-sekolah-indonesia.herokuapp.com/sekolah/s?sekolah=${namasekolah}`))
   .then(response => response.json())
   .then(data => {
@@ -126,7 +126,7 @@ fetch(encodeURI(`https://api-translate.azharimm.site/translate?engine=google&tex
 router.get('/search/resepmasakan', async (req, res, next) => {
   let query = req.query.query
   if (!query) return res.json('Input Parameter Query')
-  fetch(encodeURIComponent(`https://masak-apa-tomorisakura.vercel.app/api/search/?q=${query}`))
+  fetch(encodeURI(`https://masak-apa-tomorisakura.vercel.app/api/search/?q=${query}`))
   .then(response => response.json())
   .then(data => {
     var result = data;

@@ -80,24 +80,6 @@ router.get('/tools/html-scraper', async (req, res, next) => {
   })
 })
 
-
-router.get('/search/handphone', async (req, res, next) => {
-  let query = req.query.query
-  if (!query) return res.json(loghandler.notquery)
-  axios.get(`https://api-mobilespecs.azharimm.site/v2/search?query=${query}`)
-  .then(result => {
-    for (let i of result.data.data.phones) {
-      teks += `Title: Hasil Pencarian Dari Hp ${query}\n`
-      teks += `brand: ${i.brand}\n`
-      teks += `phone_type: ${i.phone_name}\n`
-      teks += `slug: ${i.slug}\n`
-      teks += `image: ${i.image}\n`
-      teks += `detail: https://br-restapi.herokuapp.com/info/detailhp?slug=${i.slug}`
-      res.json(teks)
-    }
-  })
-})
-
 router.get('/info/vaksincovid19', async (req, res, next) => {
   fetch(encodeURI('https://vaksincovid19-api.vercel.app/api/vaksin'))
   .then(response => response.json())
@@ -1109,9 +1091,9 @@ router.get('/canvas/xnxx', async (req, res) => {
        let query = req.query.query
        if (!query) return res.json(loghandler.notquery)
         hxz.wattpad(query)
-        .then(res => {
+        .then(result => {
          res.json({
-         reeult
+         result
      })
    })
 })

@@ -67,6 +67,108 @@ loghandler = {
     }
 }
 
+router.get('/info/allfootballlang', async (req, res, next) => {
+  fetch(encodeURI('https://api-football-standings.azharimm.site/leagues'))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json(result)
+  })
+  .catch(e => {
+    res.json(loghandler.error)
+  })
+})
+
+router.get('/info/detailleague', async(req, res, next) => {
+  let league = req.quey.league
+  if (!league) return res.json(loghandler.notuquery)
+  fefch(encodeURI(`https://api-football-standings.azharimm.site/leagues/${league}`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json(result)
+  })
+  .catch(e => {
+    res.json(loghandler.error)
+  })
+})
+
+router.get('/pray/doaseharihari', async (req, res, next) => {
+  fetch(encodeURI('https://doa-doa-api-ahmadramadhan.fly.dev/api'))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json(result)
+  })
+  .catch(e => {
+    res.json(loghandler.error)
+  })
+})
+
+router.get('/pray/caridoa', async (req, res, next) => {
+  let doa = req.query.doa
+  if (!doa) return res.json('Input Parameter Doa Yang Mau Di Cari!')
+  fetch(encodeURI(`https://doa-doa-api-ahmadramadhan.fly.dev/api/doa/${doa}`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json(result)
+  })
+   .catch(e => {
+    res.json(loghandler.error)
+  })
+})
+
+router.get('/pray/randomdoa', async (req, res, next) => {
+  fetch(encodeURI('https://doa-doa-api-ahmadramadhan.fly.dev/api/doa/v1/random'))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json(result)
+  })
+   .catch(e => {
+    res.json(loghandler.error)
+  })
+})
+
+router.get('/pray/allsurah', async (req, res, next) => {
+  fetch(encodeURI('https://api.npoint.io/99c279bb173a6e28359c/data'))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json(result)
+  })
+  .catch(e => {
+    res.json('Internal Server Error')
+  })
+})
+
+router.get('/info/resep-hariini', async (req, res, next) => {
+  fetch(encodeURI('https://masak-apa-tomorisakura.vercel.app/api/recipes'))
+  .then(response => response.json())
+  .then(data => { 
+    var result = data;
+    res.json(result)
+  })
+  .catch(e => {
+    res.json('Internal Server Error!')
+  })
+})
+
+router.get('/info/resep-bypage', async (req, res, next) => {
+  let page = req.query.page
+  if (!page) return res.json('Input Parameter Page!')
+  fetch(encodeURI(`https://masak-apa-tomorisakura.vercel.app/api/recipes/:${page}`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json(result)
+  })
+  .catch(e => {
+    res.json('Internal Server Error!')
+  })
+})
+
 router.get('/info/cuaca', async (req, res, next) => {
   let provinsi = req.query.provinsi
   let kabupaten = req.query.kabupaten

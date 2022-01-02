@@ -67,6 +67,90 @@ loghandler = {
     }
 }
 
+router.get('/info/vaksincovid19', async (req, res, next) => {
+  fetch(encodeURI('https://vaksincovid19-api.vercel.app/api/vaksin'))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json(result)
+  })
+  .catch(e => {
+    res.json('Internal Server Error!')
+  })
+})
+
+router.get('/search/sekolah', async (req, res, next) => {
+  let jsekolah = req.query.jsekolah
+  let page = req.query.page
+  if (!jsekolah) return res.json('Input Parameter Jenjang Sekolah! Contoh: SD/SMP/SMA/SMK')
+  if (!page) return res.json('Input Parameter Page From 1 - 10')
+  fetch(encodeURI(`https://api-sekolah-indonesia.herokuapp.com/sekolah/${jsekolah}?page=${page}&perPage=20`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json(result)
+  })
+  .catch(e => {
+    res.json('Internal Server Error!')
+  })
+})
+
+router.get('/search/sekolah-byname', async (req, res, next) => {
+  let namasekolah = req.query.namasekolah
+  if (!namasekolah) return res.json('Input Parameter Query')
+  fetch(encodeURI(`https://api-sekolah-indonesia.herokuapp.com/sekolah/s?sekolah=${namasekolah}`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json(data)
+  })
+  .catch(e => {
+    res.json('Internal Sever Error!')
+  })
+})
+
+router.get('/edukasi/translate', async (req, res, next) => {
+     let text = req.query.text
+     let lang = req.query.lang
+fetch(encodeURI(`https://api-translate.azharimm.site/translate?engine=google&text=${text}&to=${lang}`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json(result)
+  })
+  .catch(e => {
+    res.json('Internal Server Error!')
+  })
+})
+
+router.get('/search/resepmasakan', async (req, res, next) => {
+  let query = req.query.query
+  if (!query) return res.json('Input Parameter Query')
+  fetch(encodeURIComponent(`https://masak-apa-tomorisakura.vercel.app/api/search/?q=${query}`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json(result)
+  })
+  .catch(e => {
+    res.json('Internal Server Error!')
+  })
+})
+
+router.get('/info/detail-resep', async (req, res, next) => {
+  let key = req.query.key
+  if (!key) return res.json('Input Parameter Key Resep Masakan')
+  fetch(encodeURI(`https://masak-apa-tomorisakura.vercel.app/api/recipe/:${key}`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json(result)
+  })
+  .catch(e => {
+    res.json('Internal Server Error!')
+  })
+})
+
 router.get('/info/allfootballlang', async (req, res, next) => {
   fetch(encodeURI('https://api-football-standings.azharimm.site/leagues'))
   .then(response => response.json())

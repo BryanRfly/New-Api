@@ -67,6 +67,38 @@ loghandler = {
     }
 }
 
+router.get('/tools/html-scraper', async (req, res, next) => {
+  let url = req.query.url
+  if (!url) return res.json(loghandler.noturl)
+  axios.get(`${url}`)
+  .then(data => {
+    var result = data;
+    res.json(result)
+  })
+  .catch(e => {
+    res.json('Internal Server Error!')
+  })
+})
+
+router.get('/search/handphone', async (req, res, next) => {
+  let query = req.query.query
+  if (!query) return res.json('Input Parameter Query!')
+  fetch(encodeURI(`https://pecundang.herokuapp.com/api/gsmarena?query=${query}`))
+  .then(response => response.json())
+  .then(data => {
+    var hasil = data;
+    for (let i of hasil.result) {
+      teks += `Judul; ${i.judul}\n`
+      teks += `pict_img: ${i.thumb}\n`
+      teks += `link: ${i.link}`
+    }
+    res.json(teks)
+  })
+  .catch(e => {
+    res.json('Internal Server Error!')
+  })
+})
+
 router.get('/info/vaksincovid19', async (req, res, next) => {
   fetch(encodeURI('https://vaksincovid19-api.vercel.app/api/vaksin'))
   .then(response => response.json())

@@ -77,7 +77,7 @@ router.get('/info/cuaca', async (req, res, next) => {
    .then(response => response.json())
    .then(data => {
      var result = data;
-     res.json(JSON.stringify(result, null, 2))
+     res.json(result)
    })
    .catch(e => {
      res.json(loghandler.error)
@@ -91,7 +91,21 @@ router.get('/search/phone', async (req, res, next) => {
   .then(response => response.json())
   .then(data => {
     var result = data;
-    res.json(JSON.stringify(result, null, 2))
+    res.json({
+      status: true,
+      code: 200,
+      cretaor: 'BryanRfly',
+      result: {
+        title: result.data.title,
+        phones_info: {
+          brand: data.phones.brand,
+          phone_series: data.phones.phone_name,
+          phone_slug: data.phones.slug,
+          image: data.phones.image,
+          detail: `https://br-restapi/api/info/spekhp?phone=${handphone}`
+        }
+      }
+    })
   })
   .catch(e => {
     res.json(loghandler.error)

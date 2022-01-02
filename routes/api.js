@@ -84,34 +84,6 @@ router.get('/info/cuaca', async (req, res, next) => {
    })
 })
 
-router.get('/search/phone', async (req, res, next) => {
-  let handphone = req.query.handphone
-  if (!handphone) return res.json('Input Parameter Handphone!')
-  fetch(encodeURI(`https://api-mobilespecs.azharimm.site/v2/search?query=${handphone}`))
-  .then(response => response.json())
-  .then(data => {
-    var result = data;
-    res.json({
-      status: true,
-      code: 200,
-      cretaor: 'BryanRfly',
-      result: {
-        title: result.data.title,
-        phones_info: {
-          brand: data.phones.brand,
-          phone_series: data.phones.phone_name,
-          phone_slug: data.phones.slug,
-          image: data.phones.image,
-          detail: `https://br-restapi/api/info/spekhp?phone=${handphone}`
-        }
-      }
-    })
-  })
-  .catch(e => {
-    res.json(loghandler.error)
-  })
-})
-
 router.get('/downloader/stickpackdl', async (req, res, next) => {
           let url = req.query.url
           if (!url) return res.json('Input Parameter Url!')

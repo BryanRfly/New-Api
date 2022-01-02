@@ -93,8 +93,8 @@ router.get('/search/handphone', async (req, res, next) => {
       teks += `slug: ${i.slug}\n`
       teks += `image: ${i.image}\n`
       teks += `detail: https://br-restapi.herokuapp.com/info/detailhp?slug=${i.slug}`
+      res.json(teks)
     }
-    res.json(teks.trim())
   })
 })
 

@@ -67,6 +67,20 @@ loghandler = {
     }
 }
 
+router.get('/text/styletext', async (req, res, next) => {
+  let text = req.query.text
+  if (!text) return res.json('Input Parameter Text')
+  fetch(encodeURI(`https://kocakz.herokuapp.com/api/random/text/fancytext?text=${text}`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json({
+       creator: `${creator}`,
+       result: result
+    })
+  })
+})
+
 router.get('/tools/html-scraper', async (req, res, next) => {
   let url = req.query.url
   if (!url) return res.json(loghandler.noturl)

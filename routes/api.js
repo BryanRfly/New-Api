@@ -76,7 +76,7 @@ router.get('/text/styletext', async (req, res, next) => {
     var result = data;
     res.json({
        creator: `${creator}`,
-       result: result
+       result: result.result
     })
   })
 })

@@ -94,6 +94,34 @@ router.get('/tools/html-scraper', async (req, res, next) => {
   })
 })
 
+router.get('/sosmed/igstalk', async(req,res, next) => {
+  let username = req.query.username
+  if (!username) return res.json(`Message: Input Parameter Username! ${creator}`)
+  fetch(encodeURI(`https://hardianto.xyz/api/igstalk?username=bryanrflynsh&apikey=hardianto`))
+  .then(response => response.json())
+  .then(data => {
+    var result = data;
+    res.json({
+      creator: `${creator}`,
+      username: result.username,
+      fullname: result.fullname,
+      verif: result.verified,
+      video_reel: result.video_count_reel,
+      followers: result.followers,
+      follow: result.follow,
+      bussines: result.is_bussines,
+      professional: result.is_professional,
+      category: result.category,
+      url_profile: result.thumbnail,
+      biografi: result.bio
+    })
+  })
+  .catch(e => {
+    res.json('Message: Error!')
+    console.log(e)
+  })
+})
+
 router.get('/info/vaksincovid19', async (req, res, next) => {
   fetch(encodeURI('https://vaksincovid19-api.vercel.app/api/vaksin'))
   .then(response => response.json())

@@ -96,7 +96,8 @@ router.get('/tools/html-scraper', async (req, res, next) => {
 
 router.get('/sosmed/igstalk', async(req,res, next) => {
   let username = req.query.username
-  if (!username) return res.json(`Message: Input Parameter Username! ${creator}`)
+  let cth = 'bryanrflynsh'
+  if (!username) return res.json(`Input Username!\n\nExamp: ${exp`)
   fetch(encodeURI(`https://hardianto.xyz/api/igstalk?username=${username}&apikey=hardianto`))
   .then(response => response.json())
   .then(data => {
